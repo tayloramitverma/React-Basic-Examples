@@ -10,11 +10,18 @@
     <!-- Load Babel Compiler -->
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-    <div id='root'></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id='root'></div>
+            </div>
+        </div> 
+    </div>
 </body>
-
 <script type="text/babel">
 
 class ContactForm extends React.Component {
@@ -24,11 +31,26 @@ class ContactForm extends React.Component {
         country: '',
         city: '',
         job: '',
+        nameErrormsg: false,
+        emailErrormsg: false
     }
 
     handleFormSubmit( event ) {
 
         event.preventDefault();
+
+        if(this.state.name == ''){
+            this.setState({nameErrormsg:true})
+        }else{
+            this.setState({nameErrormsg:false})
+        }
+
+        if(this.state.email == ''){
+            this.setState({emailErrormsg:true})
+        }else{
+            this.setState({emailErrormsg:false})
+        }
+
         let formData = new FormData();
         formData.append('name', this.state.name)
         formData.append('email', this.state.email)
@@ -56,27 +78,75 @@ class ContactForm extends React.Component {
     render() {
         return (
             <form>
-                <label>Name</label>
-                <input type="text" name="name" value={this.state.name}
-                    onChange={e => this.setState({ name: e.target.value })}/>
+                <div class="form-group">
+                    <label for="appInputName">Name</label>
+                    <input
+                        type="text"
+                        id="appInputName"
+                        className="form-control"
+                        value={this.state.name}
+                        onChange={e => this.setState({ name: e.target.value })}
+                        placeholder="Enter Name" 
+                    />
+                    {this.state.nameErrormsg && <small className="text-danger">
+                        Name is required.
+                    </small> }
+                    
+                </div>
 
-                <label>Email</label>
-                <input type="email" name="email" value={this.state.email}
-                    onChange={e => this.setState({ email: e.target.value })}/>
+                <div class="form-group">
+                    <label for="appInputEmail">Email</label>
+                    <input
+                        type="text"
+                        id="appInputEmail"
+                        className="form-control"
+                        value={this.state.email}
+                        onChange={e => this.setState({ email: e.target.value })}
+                        placeholder="Enter email" 
+                    />
+                    {this.state.emailErrormsg && <small className="text-danger">
+                        Email is required.
+                    </small> }
+                </div>
 
-                <label>Country</label>
-                <input type="text" name="country" value={this.state.country}
-                    onChange={e => this.setState({ country: e.target.value })}/>
+                <div class="form-group">
+                    <label for="appInputCountry">County</label>
+                    <input
+                        type="text"
+                        id="appInputCountry"
+                        className="form-control"
+                        value={this.state.country}
+                        onChange={e => this.setState({ country: e.target.value })}
+                        placeholder="Enter Country" 
+                    />
+                </div>
 
-                <label>City</label>
-                <input type="text" name="city" value={this.state.city}
-                    onChange={e => this.setState({ city: e.target.value })}/>
+                <div class="form-group">
+                    <label for="appInputCity">City</label>
+                    <input
+                        type="text"
+                        id="appInputCity"
+                        className="form-control"
+                        value={this.state.city}
+                        onChange={e => this.setState({ city: e.target.value })}
+                        placeholder="Enter City" 
+                    />
+                </div>
 
-                <label>Job</label>
-                <input type="text" name="job" value={this.state.job}
-                    onChange={e => this.setState({ job: e.target.value })}/>
+                <div class="form-group">
+                    <label for="appInputJob">Job Title</label>
+                    <input
+                        type="text"
+                        id="appInputJob"
+                        className="form-control"
+                        value={this.state.job}
+                        onChange={e => this.setState({ job: e.target.value })}
+                        placeholder="Enter Job" 
+                    />
+                </div>
 
-                <input type="submit" onClick={e => this.handleFormSubmit(e)} value="Create Contact" />
+
+                <input type="submit" className="btn btn-primary" onClick={e => this.handleFormSubmit(e)} value="Create Contact" />
             </form>
         );
     }
@@ -92,7 +162,7 @@ class App extends React.Component {
         return (
             <React.Fragment>
             <h1>Contact Management</h1>
-            <table border='1' width='100%' >
+            <table className="table table-striped" >
             <tr>
                 <th>Name</th>
                 <th>Email</th>
