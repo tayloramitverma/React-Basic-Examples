@@ -1,16 +1,36 @@
-import React from 'react';
-import {CallBackButton} from './CallBackButton';
+import React, { Component } from 'react';
+//import {CallBackButton} from './CallBackButton';
 
-export function Summary(props) {
+import SimpleButton from './SimpleButton';
+import ButtonHooks from './ButtonHooks';
 
-    return <React.Fragment>
+export default class Summary extends Component {
+
+
+    render() {
+
+        const props = this.props;
+        return <React.Fragment>
             <td>{props.index+1}</td>
             <td>{props.name}</td>
             <td>{props.name.length}</td>
             <td>
-                <CallBackButton theme={'success'} text={'Reverse'} callback={props.reverseCallback} />
-                <CallBackButton theme={'info'} text={'Promote'} callback={()=>props.promoteCallback(props.name)} />
-                <CallBackButton callback={props.reverseCallback} />
+                <SimpleButton
+                    className={`btn btn-success btn-sm m-1`}
+                    text={`Reverse (${props.name})`}
+                    callback={props.reverseCallback}
+                    {...props}
+                />
+                <ButtonHooks
+                    className={`btn btn-info btn-sm m-1`}
+                    text={`Promote (${props.name})`}
+                    callback={()=>props.promoteCallback(props.name)}
+                    {...props}
+                />
             </td>
-    </React.Fragment>
+        </React.Fragment>
+
+    }
+
 }
+

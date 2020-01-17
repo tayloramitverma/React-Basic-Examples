@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { sumValues, divideValues, subtractValues as deduct, multiplyValues } from  './example';
 
@@ -10,7 +10,7 @@ import {asyncAdd} from './async'
 import 'bootstrap/dist/css/bootstrap.css';
 
 import { Message } from "./Message";
-import { Summary } from "./Summary";
+import Summary from "./Summary";
 
 import ReactDOM from 'react-dom';
 
@@ -56,6 +56,10 @@ function App() {
 
   doTask(values);
 
+  const [counter, setCounter] = useState(0);
+  const incrementCounter = (increment) => setCounter( counter + increment ); 
+
+
   return (
     <div className="App">
       <Message name="Amit" greeting="Hello" names={['Ram', 'Shayam', 'Karishna']}/>
@@ -76,6 +80,8 @@ function App() {
                           index={index}
                           reverseCallback={reverseList}
                           promoteCallback={promoteList}
+                          counter={counter}
+                          incrementCallback={incrementCounter}
                         />
                     </tr>
                 )}
