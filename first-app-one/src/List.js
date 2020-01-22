@@ -1,7 +1,5 @@
 import React from 'react'
 
-// This is the child component of the App
-
 function listItems(props){
 
     const items = props.numbers;
@@ -13,5 +11,7 @@ function listItems(props){
     return <ul>{listdisplay}</ul>;
 
 }
+
+
 
 export default listItems;
