@@ -1,7 +1,7 @@
-import React, {Fragment} from 'react'
-import List from './List'
-
-import Student from './Student'
+import React, {Fragment} from 'react';
+import List from './List';
+import Student from './Student';
+import Example from './Example'
 
 import './App.css';
 
@@ -14,6 +14,7 @@ const firstFunc = ()=>{
             <h2>This is testing</h2>
             <ul><List numbers={numbers} prefixname="Taylor"/></ul>
             <Student name="Rahul" roll="420" />
+            <Example />
         </Fragment>
 
     );
